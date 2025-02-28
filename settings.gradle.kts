@@ -21,3 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "MESIbajk"
 include(":app")
+
+include(":bikes:data")
+include(":bikes:domain")
+include(":bikes:ui")
