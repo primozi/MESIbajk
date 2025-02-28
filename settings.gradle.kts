@@ -10,6 +10,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+    includeBuild("convenientplugins")
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -21,6 +22,10 @@ dependencyResolutionManagement {
 
 rootProject.name = "MESIbajk"
 include(":app")
+
+include(":core:data")
+include(":core:domain")
+include(":core:ui")
 
 include(":bikes:data")
 include(":bikes:domain")

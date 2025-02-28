@@ -4,6 +4,17 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/convenientplugins" name="convenientplugins">
+                <projects>
+                  <project path="$PROJECT_DIR$/convenientplugins" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
         <option name="testRunner" value="CHOOSE_PER_TEST" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
@@ -15,6 +26,11 @@
             <option value="$PROJECT_DIR$/bikes/data" />
             <option value="$PROJECT_DIR$/bikes/domain" />
             <option value="$PROJECT_DIR$/bikes/ui" />
+            <option value="$PROJECT_DIR$/convenientplugins" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/data" />
+            <option value="$PROJECT_DIR$/core/domain" />
+            <option value="$PROJECT_DIR$/core/ui" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
