@@ -1,5 +1,6 @@
 plugins {
     id("ui-plugin")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -13,6 +14,18 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+
+    implementation(libs.kotlin.serialization.json)
+
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.bundles.compose)
+
+    implementation(platform(libs.koin.bom))
+    implementation(libs.bundles.koin)
+
+    api(libs.koin.annotations)
+    ksp(libs.koin.annotations.ksp)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

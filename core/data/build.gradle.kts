@@ -14,7 +14,7 @@ dependencies {
     implementation(project(":core:domain"))
 
     api(libs.koin.annotations)
-    implementation(libs.koin.annotations.ksp)
+    ksp(libs.koin.annotations.ksp)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

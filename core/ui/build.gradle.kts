@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "software.ivancic.base.ui"
+    namespace = "software.ivancic.core.ui"
 }
 
 dependencies {
@@ -15,7 +15,7 @@ dependencies {
     implementation(libs.bundles.compose)
 
     api(libs.koin.annotations)
-    implementation(libs.koin.annotations.ksp)
+    ksp(libs.koin.annotations.ksp)
 
     api(libs.androidx.lifecycle.viewmodel)
 

@@ -7,9 +7,3 @@ import org.koin.dsl.module
 @Module
 @ComponentScan("software.ivancic.core.domain")
 class CoreDomainDi
-
-val coreDomainDi = module {
-    single<CoroutineDispatchers> {
-        CoroutineDispatchersImpl()
-    }
-}

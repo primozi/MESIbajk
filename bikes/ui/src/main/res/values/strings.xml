@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="available">Available</string>
+    <string name="reserved">Reserved</string>
+    <string name="add_reservation">Add reservation</string>
+</resources>
