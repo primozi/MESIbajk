@@ -31,7 +31,7 @@ internal fun BikesListScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     BikesListScreenInternal(
-        bikeWithAvailabilityData = state.bikeWithAvailabilityData,
+        bikes = state.bikes,
         onAddReservationClicked = {
             viewModel.submitAction(BikesListViewModel.Action.AddReservationClicked)
         },
@@ -55,7 +55,7 @@ internal fun BikesListScreen(
 
 @Composable
 private fun BikesListScreenInternal(
-    bikeWithAvailabilityData: List<BikeWithAvailabilityData>,
+    bikes: List<BikeWithAvailabilityData>,
     onAddReservationClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -68,7 +68,7 @@ private fun BikesListScreenInternal(
                 .fillMaxWidth()
                 .weight(1f)
         ) {
-            items(bikeWithAvailabilityData) {
+            items(bikes) {
                 BikeItem(it)
             }
         }
@@ -88,7 +88,7 @@ private fun BikesListScreenInternal(
 private fun BikesListScreenInternalPreview() {
     MaterialTheme {
         BikesListScreenInternal(
-            bikeWithAvailabilityData = listOf(
+            bikes = listOf(
                 BikeWithAvailabilityData(id = 1, name = "Glavko", "code_Glavko", false),
                 BikeWithAvailabilityData(id = 2, name = "Srečko", "code_Srečko", true),
                 BikeWithAvailabilityData(id = 3, name = "Kihec", "code_Kihec", true),

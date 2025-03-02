@@ -4,5 +4,5 @@ data class BikeWithAvailabilityData(
     val id: Int,
     val name: String,
     val code: String,
-    val isCurrentlyReserved: Boolean,
+    val isReserved: Boolean,
 )

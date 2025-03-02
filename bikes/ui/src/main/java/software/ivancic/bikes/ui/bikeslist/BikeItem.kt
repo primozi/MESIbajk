@@ -27,7 +27,7 @@ internal fun BikeItem(
                 .weight(1f)
         )
 
-        if (bikeWithAvailabilityData.isCurrentlyReserved) {
+        if (bikeWithAvailabilityData.isReserved) {
             Text(
                 text = stringResource(R.string.reserved),
                 color = MaterialTheme.colorScheme.error,

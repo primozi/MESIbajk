@@ -18,11 +18,11 @@ class BikesListViewModel(
             Action.LoadData -> {
                 getBikesWithAvailabilityData(Unit)
                     .onSuccess { bikes ->
-                        updateState { it.copy(bikeWithAvailabilityData = bikes) }
+                        updateState { it.copy(bikes = bikes) }
                     }
                     .onFailure { t ->
                         // todo alert user
-                        updateState { it.copy(bikeWithAvailabilityData = emptyList()) }
+                        updateState { it.copy(bikes = emptyList()) }
                     }
             }
 
@@ -42,6 +42,6 @@ class BikesListViewModel(
     }
 
     data class State(
-        val bikeWithAvailabilityData: List<BikeWithAvailabilityData> = emptyList(),
+        val bikes: List<BikeWithAvailabilityData> = emptyList(),
     )
 }

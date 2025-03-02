@@ -11,8 +11,8 @@ import software.ivancic.bikes.data.db.entity.ReservationEntity
 interface BikeDao {
 
     @Query("SELECT b.*, " +
-            "(CASE WHEN r.start_timestamp < datetime(current_timestamp, 'localtime') " +
-            "AND r.end_timestamp > datetime(current_timestamp, 'localtime') " +
+            "(CASE WHEN r.start_timestamp < (unixepoch() * 1000) " +
+            "AND r.end_timestamp > (unixepoch() * 1000) " +
             "THEN 1 ELSE 0 END) AS is_reserved " +
             "FROM bikes b " +
             "LEFT JOIN reservations r ON b.id = r.bike_id")

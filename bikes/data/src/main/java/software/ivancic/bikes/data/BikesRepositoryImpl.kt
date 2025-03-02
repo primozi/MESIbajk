@@ -31,7 +31,7 @@ class BikesRepositoryImpl(
                 id = it.bikeEntity.id,
                 name = it.bikeEntity.name,
                 code = it.bikeEntity.code,
-                isCurrentlyReserved = it.isReserved,
+                isReserved = it.isReserved,
             )
         }
     }
