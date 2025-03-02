@@ -12,4 +12,11 @@
     <string name="select_bike">Select bike</string>
     <string name="last_reservation">Last reservation</string>
     <string name="next_reservation">Next reservation</string>
+    <string name="development">Development</string>
+    <string name="production">Production</string>
+    <string name="sales">Sales</string>
+    <string name="marketing">Marketing</string>
+    <string name="intent_private">Private</string>
+    <string name="intent_business">Business</string>
+    <string name="users_name">User\'s name</string>
 </resources>

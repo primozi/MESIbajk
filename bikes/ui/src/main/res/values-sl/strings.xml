@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="available">Na voljo</string>
+    <string name="reserved">Rezervirano</string>
+    <string name="add_reservation">Dodaj rezervacijo</string>
+    <string name="select_department">Izberi oddelek</string>
+    <string name="intent">Namen</string>
+    <string name="from">Od:</string>
+    <string name="to">Do:</string>
+    <string name="add">Dodaj</string>
+    <string name="select_intent">Izberi namen</string>
+    <string name="select_bike">Izberi kolo</string>
+    <string name="last_reservation">Zadnja rezervacija</string>
+    <string name="next_reservation">Naslednja rezervacija</string>
+    <string name="development">Razvoj</string>
+    <string name="production">Proizvodnja</string>
+    <string name="sales">Prodaja</string>
+    <string name="marketing">Marketing</string>
+    <string name="intent_private">Zasebno</string>
+    <string name="intent_business">Poslovno</string>
+    <string name="users_name">Uporabnikovo ime</string>
+</resources>

@@ -11,9 +11,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -21,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -29,6 +32,7 @@ import software.ivancic.bikes.domain.model.BikeDetails
 import software.ivancic.bikes.domain.model.Department
 import software.ivancic.bikes.domain.model.Intent
 import software.ivancic.bikes.ui.R
+import software.ivancic.bikes.ui.toReadableString
 import software.ivancic.core.ui.DateTimeFormattingUtil
 
 @Composable
@@ -44,7 +48,10 @@ internal fun BikeDetailsScreen(
         lastReservation = state.lastReservation,
         nextReservation = state.nextReservation,
         reservationsCount = state.numberOfReservations,
-        modifier = modifier,
+        modifier = modifier
+            .padding(
+                horizontal = 16.dp,
+            ),
     )
 
     LaunchedEffect(Unit) {
@@ -63,15 +70,23 @@ private fun BikeDetailsScreenInternal(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(12.dp),
         modifier = modifier,
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Text(text = bikeName)
-            Text(text = bikeCode)
+            Text(
+                text = bikeName,
+                style = MaterialTheme.typography.headlineSmall
+            )
+            Text(
+                text = "#$bikeCode",
+                style = MaterialTheme.typography.bodyLarge
+            )
         }
 
         lastReservation?.let {
@@ -116,11 +131,15 @@ private fun BikeDetailsScreenInternal(
 
                         Intent.entries.forEach {
                             Text(
-                                text = it.name,
+                                text = it.toReadableString(),
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier
                                     .background(Color.White)
                                     .weight(1f)
+                                    .padding(
+                                        horizontal = 4.dp,
+                                        vertical = 2.dp,
+                                    )
                             )
                         }
                     }
@@ -134,11 +153,17 @@ private fun BikeDetailsScreenInternal(
                                 .fillMaxWidth()
                         ) {
                             Text(
-                                text = department.name,
+                                text = department.toReadableString(),
                                 textAlign = TextAlign.End,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
                                 modifier = Modifier
                                     .background(Color.White)
                                     .weight(1f)
+                                    .padding(
+                                        horizontal = 4.dp,
+                                        vertical = 2.dp,
+                                    )
                             )
 
                             Intent.entries.forEach { intent ->
@@ -148,6 +173,10 @@ private fun BikeDetailsScreenInternal(
                                     modifier = Modifier
                                         .background(Color.White)
                                         .weight(1f)
+                                        .padding(
+                                            horizontal = 4.dp,
+                                            vertical = 2.dp,
+                                        )
                                 )
                             }
                         }
@@ -163,22 +192,32 @@ private fun ReservationLayout(
     label: String,
     reservation: BikeDetails.BasicReservationData,
 ) {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
-        Text(text = label)
-        Text(text = reservation.name)
-    }
-    Row(
-        horizontalArrangement = Arrangement.End,
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
-        Text(text = DateTimeFormattingUtil.formatDateTime(reservation.from))
-        Text(text = " - ")
-        Text(text = DateTimeFormattingUtil.formatDateTime(reservation.to))
+    Column {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            CompositionLocalProvider(LocalTextStyle provides MaterialTheme.typography.bodyLarge) { }
+            Text(
+                text = label,
+            )
+            Text(
+                text = reservation.name,
+            )
+        }
+        CompositionLocalProvider(LocalTextStyle provides MaterialTheme.typography.titleMedium) {
+            Row(
+                horizontalArrangement = Arrangement.End,
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                Text(text = DateTimeFormattingUtil.formatDateTime(reservation.from))
+                Text(text = " - ")
+                Text(text = DateTimeFormattingUtil.formatDateTime(reservation.to))
+            }
+        }
     }
 }
 

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
@@ -21,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import kotlinx.coroutines.flow.collectLatest
@@ -29,6 +31,7 @@ import software.ivancic.bikes.domain.model.Bike
 import software.ivancic.bikes.domain.model.Department
 import software.ivancic.bikes.domain.model.Intent
 import software.ivancic.bikes.ui.R
+import software.ivancic.bikes.ui.toReadableString
 import software.ivancic.core.ui.DateTime
 import software.ivancic.core.ui.DateTimeFormattingUtil
 import software.ivancic.core.ui.DateTimePicker
@@ -81,6 +84,9 @@ fun AddReservationScreen(
             viewModel.submitAction(AddReservationViewModel.Action.AddClicked)
         },
         modifier = modifier
+            .padding(
+                horizontal = 16.dp,
+            )
     )
 
     var showDateTimeFromDialog by remember { mutableStateOf(false) }
@@ -155,13 +161,14 @@ private fun AddReservationScreenInternal(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier
     ) {
         TextField(
             value = borrowerName,
             onValueChange = onBorrowerNameChanged,
             label = {
-                MaterialTheme.typography.bodyMedium
+                Text(text = stringResource(R.string.users_name))
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -173,7 +180,14 @@ private fun AddReservationScreenInternal(
             onItemSelected = onBikeSelected,
             selectedItemComposable = {
                 Text(
-                    text = it?.toString() ?: stringResource(R.string.select_bike)
+                    text = it?.name ?: stringResource(R.string.select_bike),
+                    style = MaterialTheme.typography.headlineSmall,
+                )
+            },
+            listItemComposable = {
+                Text(
+                    text = it.name,
+                    style = MaterialTheme.typography.headlineSmall,
                 )
             },
             modifier = Modifier
@@ -186,7 +200,14 @@ private fun AddReservationScreenInternal(
             onItemSelected = onDepartmentSelected,
             selectedItemComposable = {
                 Text(
-                    text = it?.toString() ?: stringResource(R.string.select_department)
+                    text = it?.toReadableString() ?: stringResource(R.string.select_department),
+                    style = MaterialTheme.typography.headlineSmall,
+                )
+            },
+            listItemComposable = {
+                Text(
+                    text = it.toReadableString(),
+                    style = MaterialTheme.typography.headlineSmall,
                 )
             },
             modifier = Modifier
@@ -194,7 +215,6 @@ private fun AddReservationScreenInternal(
         )
 
         Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxWidth()
         ) {
@@ -203,6 +223,7 @@ private fun AddReservationScreenInternal(
                 date = DateTimeFormattingUtil.formatDate(from),
                 time = DateTimeFormattingUtil.formatTime(from),
                 modifier = Modifier
+                    .weight(1f)
                     .clickable(
                         onClick = onDateTimeFromClicked
                     )
@@ -213,6 +234,7 @@ private fun AddReservationScreenInternal(
                 date = DateTimeFormattingUtil.formatDate(to),
                 time = DateTimeFormattingUtil.formatTime(to),
                 modifier = Modifier
+                    .weight(1f)
                     .clickable(
                         onClick = onDateTimeToClicked
                     )
@@ -235,6 +257,7 @@ private fun AddReservationScreenInternal(
         ) {
             Text(
                 text = "$approxDistanceInKm km",
+                style = MaterialTheme.typography.headlineSmall,
             )
         }
 
@@ -244,7 +267,14 @@ private fun AddReservationScreenInternal(
             onItemSelected = onIntentChanged,
             selectedItemComposable = {
                 Text(
-                    text = it?.toString() ?: stringResource(R.string.select_intent)
+                    text = it?.toReadableString() ?: stringResource(R.string.select_intent),
+                    style = MaterialTheme.typography.headlineSmall,
+                )
+            },
+            listItemComposable = {
+                Text(
+                    text = it.toReadableString(),
+                    style = MaterialTheme.typography.headlineSmall,
                 )
             },
             modifier = Modifier
