@@ -31,6 +31,8 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
+
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_21.toString()
@@ -50,10 +52,13 @@ dependencies {
     implementation(project(":bikes:domain"))
     implementation(project(":bikes:ui"))
 
+    coreLibraryDesugaring(libs.desugar)
+
     implementation(libs.kotlin.serialization.json)
     implementation(libs.androidx.compose.navigation)
 
     implementation(libs.koin.android.base)
+    implementation(libs.koin.compose)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

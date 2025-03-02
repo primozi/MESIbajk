@@ -17,6 +17,7 @@ roomVersion = "2.6.1"
 kotlinxSerializationJson = "1.7.3"
 composeNavigation = "2.8.8"
 timberVersion = "5.0.1"
+desugarVersion = "2.1.5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -62,6 +63,8 @@ kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-s
 
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timberVersion" }
 
+desugar = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarVersion" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -73,6 +76,6 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 room = { id = "androidx.room", version.ref = "roomVersion" }
 
 [bundles]
-compose = ["androidx-compose-bom", "androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling", "androidx-ui-tooling-preview", "androidx-ui-test-manifest", "androidx-ui-test-junit4", "androidx-material3"]
+compose = ["androidx-activity-compose", "androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling", "androidx-ui-tooling-preview", "androidx-ui-test-manifest", "androidx-ui-test-junit4", "androidx-material3"]
 koin = ["koin-android-base", "koin-android", "koin-test", "koin-compose"]
 room = ["room-runtime", "room-ktx"]

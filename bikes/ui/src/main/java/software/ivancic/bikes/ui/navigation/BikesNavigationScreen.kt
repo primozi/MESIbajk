@@ -1,24 +1,29 @@
 package software.ivancic.bikes.ui.navigation
 
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
+import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import software.ivancic.bikes.ui.addreservation.AddReservationScreen
 import software.ivancic.bikes.ui.bikeslist.BikesListScreen
 
-@Composable
-internal fun BikesNavigationScreen(
-    modifier: Modifier = Modifier,
+fun NavGraphBuilder.bikesNavigationScreen(
+    navController: NavController,
 ) {
-    val navController = rememberNavController()
-    NavHost(
-        navController = navController,
-        startDestination = Destinations.BikesList,
-        modifier = modifier,
-    ) {
-        composable<Destinations.BikesList> {
-            BikesListScreen()
-        }
+    composable<BikesDestinations.BikesList> {
+        BikesListScreen(
+            navController = navController,
+            modifier = Modifier
+                .fillMaxSize()
+        )
+    }
+
+    composable<BikesDestinations.AddBikeReservation> {
+        AddReservationScreen(
+            navController = navController,
+            modifier = Modifier
+                .fillMaxSize()
+        )
     }
 }

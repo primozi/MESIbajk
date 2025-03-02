@@ -4,12 +4,18 @@ plugins {
 
 android {
     namespace = "software.ivancic.core.ui"
+
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
 }
 
 dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+
+    coreLibraryDesugaring(libs.desugar)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)

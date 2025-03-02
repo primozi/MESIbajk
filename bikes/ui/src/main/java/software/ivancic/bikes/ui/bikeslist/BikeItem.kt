@@ -10,24 +10,24 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import software.ivancic.bikes.domain.model.Bike
+import software.ivancic.bikes.domain.model.BikeWithAvailabilityData
 import software.ivancic.bikes.ui.R
 
 @Composable
 internal fun BikeItem(
-    bike: Bike,
+    bikeWithAvailabilityData: BikeWithAvailabilityData,
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
     ) {
         Text(
-            text = bike.name,
+            text = bikeWithAvailabilityData.name,
             modifier = Modifier
                 .weight(1f)
         )
 
-        if (bike.isCurrentlyReserved) {
+        if (bikeWithAvailabilityData.isCurrentlyReserved) {
             Text(
                 text = stringResource(R.string.reserved),
                 color = MaterialTheme.colorScheme.error,
@@ -50,11 +50,11 @@ private class BooleanProvider : PreviewParameterProvider<Boolean> {
 @Preview
 @Composable
 private fun BikeItemPreview(
-    @PreviewParameter(BooleanProvider::class) isCurrentlyReserved: Boolean
+    @PreviewParameter(BooleanProvider::class) isCurrentlyReserved: Boolean,
 ) {
     MaterialTheme {
         BikeItem(
-            bike = Bike(id = 1, name = "Glavko", isCurrentlyReserved),
+            bikeWithAvailabilityData = BikeWithAvailabilityData(id = 1, name = "Glavko", code = "glavko_code", isCurrentlyReserved),
         )
     }
 }

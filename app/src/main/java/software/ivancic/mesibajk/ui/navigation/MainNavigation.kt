@@ -3,9 +3,10 @@ package software.ivancic.mesibajk.ui.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import software.ivancic.bikes.ui.main.MainBikesScreen
+import software.ivancic.bikes.ui.navigation.BikesDestinations
+import software.ivancic.bikes.ui.navigation.bikesNavigationScreen
 
 @Composable
 fun MainNavigationScreen(
@@ -17,8 +18,10 @@ fun MainNavigationScreen(
         startDestination = Destinations.Bikes,
         modifier = modifier,
     ) {
-        composable<Destinations.Bikes> {
-            MainBikesScreen()
+        navigation<Destinations.Bikes>(startDestination = BikesDestinations.BikesList) {
+            bikesNavigationScreen(
+                navController = navController,
+            )
         }
     }
 }

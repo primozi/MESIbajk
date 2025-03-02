@@ -1,53 +1,66 @@
 package software.ivancic.bikes.ui.bikeslist
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
-import software.ivancic.bikes.domain.model.Bike
+import software.ivancic.bikes.domain.model.BikeWithAvailabilityData
 import software.ivancic.bikes.ui.R
+import software.ivancic.bikes.ui.navigation.BikesDestinations
 
 @Composable
 internal fun BikesListScreen(
+    navController: NavController,
+    modifier: Modifier = Modifier,
     viewModel: BikesListViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     BikesListScreenInternal(
-        bikes = state.bikes,
+        bikeWithAvailabilityData = state.bikeWithAvailabilityData,
         onAddReservationClicked = {
             viewModel.submitAction(BikesListViewModel.Action.AddReservationClicked)
         },
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = modifier,
     )
 
     LaunchedEffect(Unit) {
         viewModel.submitAction(BikesListViewModel.Action.LoadData)
     }
+
+    LaunchedEffect(Unit) {
+        viewModel.effects.collectLatest {
+            when (it) {
+                is BikesListViewModel.Effect.NavigateToAddReservation -> {
+                    navController.navigate(BikesDestinations.AddBikeReservation)
+                }
+            }
+        }
+    }
 }
 
 @Composable
-fun BikesListScreenInternal(
-    bikes: List<Bike>,
+private fun BikesListScreenInternal(
+    bikeWithAvailabilityData: List<BikeWithAvailabilityData>,
     onAddReservationClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
         LazyColumn(
@@ -55,23 +68,17 @@ fun BikesListScreenInternal(
                 .fillMaxWidth()
                 .weight(1f)
         ) {
-            items(bikes) {
+            items(bikeWithAvailabilityData) {
                 BikeItem(it)
             }
         }
 
-        Row(
-            horizontalArrangement = Arrangement.End,
-            modifier = Modifier
-                .fillMaxWidth()
+        Button(
+            onClick = onAddReservationClicked
         ) {
-            TextButton(
-                onClick = onAddReservationClicked
-            ) {
-                Text(
-                    text = stringResource(R.string.add_reservation),
-                )
-            }
+            Text(
+                text = stringResource(R.string.add_reservation),
+            )
         }
     }
 }
@@ -81,14 +88,14 @@ fun BikesListScreenInternal(
 private fun BikesListScreenInternalPreview() {
     MaterialTheme {
         BikesListScreenInternal(
-            bikes = listOf(
-                Bike(id = 1, name = "Glavko", false),
-                Bike(id = 2, name = "Srečko", true),
-                Bike(id = 3, name = "Kihec", true),
-                Bike(id = 4, name = "Pikec", true),
-                Bike(id = 5, name = "Godrnjavko", false),
-                Bike(id = 6, name = "Tepko", false),
-                Bike(id = 7, name = "Zaspanko", true),
+            bikeWithAvailabilityData = listOf(
+                BikeWithAvailabilityData(id = 1, name = "Glavko", "code_Glavko", false),
+                BikeWithAvailabilityData(id = 2, name = "Srečko", "code_Srečko", true),
+                BikeWithAvailabilityData(id = 3, name = "Kihec", "code_Kihec", true),
+                BikeWithAvailabilityData(id = 4, name = "Pikec", "code_Pikec", true),
+                BikeWithAvailabilityData(id = 5, name = "Godrnjavko", "code_Godrnjavko", false),
+                BikeWithAvailabilityData(id = 6, name = "Tepko", "code_Tepko", false),
+                BikeWithAvailabilityData(id = 7, name = "Zaspanko", "code_Zaspanko", true),
             ),
             onAddReservationClicked = {}
         )

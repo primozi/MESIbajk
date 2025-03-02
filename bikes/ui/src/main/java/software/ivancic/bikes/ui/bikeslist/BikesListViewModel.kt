@@ -1,8 +1,8 @@
 package software.ivancic.bikes.ui.bikeslist
 
 import org.koin.android.annotation.KoinViewModel
-import software.ivancic.bikes.domain.GetListOfBikesWithAvailabilityDataUseCase
-import software.ivancic.bikes.domain.model.Bike
+import software.ivancic.bikes.domain.model.BikeWithAvailabilityData
+import software.ivancic.bikes.domain.usecases.GetListOfBikesWithAvailabilityDataUseCase
 import software.ivancic.bikes.ui.bikeslist.BikesListViewModel.Action
 import software.ivancic.bikes.ui.bikeslist.BikesListViewModel.Effect
 import software.ivancic.bikes.ui.bikeslist.BikesListViewModel.State
@@ -18,16 +18,16 @@ class BikesListViewModel(
             Action.LoadData -> {
                 getBikesWithAvailabilityData(Unit)
                     .onSuccess { bikes ->
-                        updateState { it.copy(bikes = bikes) }
+                        updateState { it.copy(bikeWithAvailabilityData = bikes) }
                     }
-                    .onFailure {
+                    .onFailure { t ->
                         // todo alert user
-                        updateState { it.copy(bikes = emptyList()) }
+                        updateState { it.copy(bikeWithAvailabilityData = emptyList()) }
                     }
             }
 
             Action.AddReservationClicked -> {
-                TODO()
+                emitEffect(Effect.NavigateToAddReservation)
             }
         }
     }
@@ -37,8 +37,11 @@ class BikesListViewModel(
         data object AddReservationClicked : Action
     }
 
-    sealed interface Effect
+    sealed interface Effect {
+        data object NavigateToAddReservation : Effect
+    }
+
     data class State(
-        val bikes: List<Bike> = emptyList(),
+        val bikeWithAvailabilityData: List<BikeWithAvailabilityData> = emptyList(),
     )
 }

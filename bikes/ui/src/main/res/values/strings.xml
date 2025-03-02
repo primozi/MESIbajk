@@ -3,4 +3,11 @@
     <string name="available">Available</string>
     <string name="reserved">Reserved</string>
     <string name="add_reservation">Add reservation</string>
+    <string name="select_department">Select department</string>
+    <string name="intent">Intent</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
+    <string name="add">Add</string>
+    <string name="select_intent">Select intent</string>
+    <string name="select_bike">Select bike</string>
 </resources>
