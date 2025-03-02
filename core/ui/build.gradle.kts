@@ -26,8 +26,8 @@ dependencies {
     api(libs.androidx.lifecycle.viewmodel)
 
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.espresso.core)
 }
 
 // Compile time check

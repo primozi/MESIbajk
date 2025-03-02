@@ -5,4 +5,9 @@ enum class DbDepartment(val key: String) {
     SALES("sales"),
     MARKETING("marketing"),
     PRODUCTION("production"),
+    ;
+
+    override fun toString(): String {
+        return key
+    }
 }

@@ -29,16 +29,23 @@ class BikesListViewModel(
             Action.AddReservationClicked -> {
                 emitEffect(Effect.NavigateToAddReservation)
             }
+
+            is Action.BikeClicked -> {
+                emitEffect(Effect.NavigateToBikeDetails(action.id))
+            }
         }
     }
 
     sealed interface Action {
+        data class BikeClicked(val id: Int) : Action
+
         data object LoadData : Action
         data object AddReservationClicked : Action
     }
 
     sealed interface Effect {
         data object NavigateToAddReservation : Effect
+        data class NavigateToBikeDetails(val bikeId: Int) : Effect
     }
 
     data class State(

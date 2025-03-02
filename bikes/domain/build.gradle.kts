@@ -8,5 +8,7 @@ dependencies {
     api(libs.koin.annotations)
     ksp(libs.koin.annotations.ksp)
 
+    implementation(libs.fliptables)
+
 //    implementation(libs.timber)
 }

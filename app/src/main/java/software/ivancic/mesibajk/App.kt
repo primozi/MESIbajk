@@ -10,6 +10,7 @@ import org.koin.ksp.generated.software_ivancic_bikes_ui_BikesUiDi
 import org.koin.ksp.generated.software_ivancic_core_data_CoreDataDI
 import org.koin.ksp.generated.software_ivancic_core_domain_CoreDomainDi
 import software.ivancic.bikes.data.bikesDataDi
+import software.ivancic.bikes.ui.bikesUiDi
 
 class App : Application() {
 
@@ -27,6 +28,7 @@ class App : Application() {
                 bikesDataDi,
                 software_ivancic_bikes_domain_BikesDomainDi,
                 software_ivancic_bikes_ui_BikesUiDi,
+                bikesUiDi,
             )
         }
     }

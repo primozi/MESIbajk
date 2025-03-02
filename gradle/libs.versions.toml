@@ -18,13 +18,16 @@ kotlinxSerializationJson = "1.7.3"
 composeNavigation = "2.8.8"
 timberVersion = "5.0.1"
 desugarVersion = "2.1.5"
+fliptablesVersion = "1.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-test-core = { group = "androidx.test", name = "core", version = "1.6.1"}
+androidx-test-runner = { group = "androidx.test", name = "runner", version = "1.6.2"}
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
@@ -42,13 +45,15 @@ androidx-compose-navigation = { group = "androidx.navigation", name = "navigatio
 
 kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+
 
 koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koinVersion" }
 ## for koin-android, BOM doesn't work
-koin-android-base = { group = "io.insert-koin", name = "koin-android", version.ref = "koinVersion" }
-koin-android = { group = "io.insert-koin", name = "koin-compose-viewmodel-navigation" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koinVersion" }
+koin-compose-viewmodel-navigation = { group = "io.insert-koin", name = "koin-compose-viewmodel-navigation" }
 koin-test = { group = "io.insert-koin", name = "koin-test-junit4" }
-koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose" }
+koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose" }
 
 ## BOM exists, but doesn't work for some reason
 #koin-annotations-bom = { group = "io.insert-koin", name = "koin-annotations-bom", version.ref = "koinAnnotationsVersion" }
@@ -65,6 +70,8 @@ timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "tim
 
 desugar = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarVersion" }
 
+fliptables = { group = "com.jakewharton.fliptables", name = "fliptables", version.ref = "fliptablesVersion" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -77,5 +84,5 @@ room = { id = "androidx.room", version.ref = "roomVersion" }
 
 [bundles]
 compose = ["androidx-activity-compose", "androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling", "androidx-ui-tooling-preview", "androidx-ui-test-manifest", "androidx-ui-test-junit4", "androidx-material3"]
-koin = ["koin-android-base", "koin-android", "koin-test", "koin-compose"]
+koin = ["koin-android", "koin-compose-viewmodel-navigation", "koin-test", "koin-androidx-compose"]
 room = ["room-runtime", "room-ktx"]

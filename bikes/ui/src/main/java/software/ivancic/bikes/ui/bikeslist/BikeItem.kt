@@ -1,5 +1,6 @@
 package software.ivancic.bikes.ui.bikeslist
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
@@ -16,10 +17,14 @@ import software.ivancic.bikes.ui.R
 @Composable
 internal fun BikeItem(
     bikeWithAvailabilityData: BikeWithAvailabilityData,
+    onBikeClicked: (Int) -> Unit,
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable {
+                onBikeClicked(bikeWithAvailabilityData.id)
+            }
     ) {
         Text(
             text = bikeWithAvailabilityData.name,
@@ -54,7 +59,13 @@ private fun BikeItemPreview(
 ) {
     MaterialTheme {
         BikeItem(
-            bikeWithAvailabilityData = BikeWithAvailabilityData(id = 1, name = "Glavko", code = "glavko_code", isCurrentlyReserved),
+            bikeWithAvailabilityData = BikeWithAvailabilityData(
+                id = 1,
+                name = "Glavko",
+                code = "glavko_code",
+                isCurrentlyReserved
+            ),
+            onBikeClicked = {}
         )
     }
 }

@@ -10,4 +10,6 @@
     <string name="add">Add</string>
     <string name="select_intent">Select intent</string>
     <string name="select_bike">Select bike</string>
+    <string name="last_reservation">Last reservation</string>
+    <string name="next_reservation">Next reservation</string>
 </resources>

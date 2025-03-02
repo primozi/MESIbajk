@@ -35,6 +35,9 @@ internal fun BikesListScreen(
         onAddReservationClicked = {
             viewModel.submitAction(BikesListViewModel.Action.AddReservationClicked)
         },
+        onBikeClicked = {
+            viewModel.submitAction(BikesListViewModel.Action.BikeClicked(it))
+        },
         modifier = modifier,
     )
 
@@ -48,6 +51,10 @@ internal fun BikesListScreen(
                 is BikesListViewModel.Effect.NavigateToAddReservation -> {
                     navController.navigate(BikesDestinations.AddBikeReservation)
                 }
+
+                is BikesListViewModel.Effect.NavigateToBikeDetails -> {
+                    navController.navigate(BikesDestinations.BikeDetails(it.bikeId))
+                }
             }
         }
     }
@@ -57,6 +64,7 @@ internal fun BikesListScreen(
 private fun BikesListScreenInternal(
     bikes: List<BikeWithAvailabilityData>,
     onAddReservationClicked: () -> Unit,
+    onBikeClicked: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -69,7 +77,10 @@ private fun BikesListScreenInternal(
                 .weight(1f)
         ) {
             items(bikes) {
-                BikeItem(it)
+                BikeItem(
+                    it,
+                    onBikeClicked = onBikeClicked
+                )
             }
         }
 
@@ -97,7 +108,8 @@ private fun BikesListScreenInternalPreview() {
                 BikeWithAvailabilityData(id = 6, name = "Tepko", "code_Tepko", false),
                 BikeWithAvailabilityData(id = 7, name = "Zaspanko", "code_Zaspanko", true),
             ),
-            onAddReservationClicked = {}
+            onAddReservationClicked = {},
+            onBikeClicked = {},
         )
     }
 }

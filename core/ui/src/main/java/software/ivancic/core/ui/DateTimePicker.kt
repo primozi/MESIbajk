@@ -72,10 +72,9 @@ fun DateTimePicker(
                 confirmButton = {
                     TextButton(
                         onClick = {
-                            val dateMillis = datePickerState.selectedDateMillis!!
                             val timeMillis =
-                                timePickerState.hour * 3600 + timePickerState.minute * 60 * 1000L
-                            onDateTimeSelected(dateMillis + timeMillis)
+                                (timePickerState.hour * 3600 + timePickerState.minute * 60) * 1000L
+                            onDateTimeSelected(selectedDateMillis + timeMillis)
                         }
                     ) {
                         Text(stringResource(R.string.confirm))
