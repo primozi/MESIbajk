@@ -17,9 +17,7 @@ import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.dsl.module
 import org.koin.test.KoinTest
-import org.koin.test.get
 import org.koin.test.inject
-import org.koin.test.mock.declare
 import software.ivancic.bikes.domain.BikesRepository
 import software.ivancic.bikes.domain.model.Bike
 import software.ivancic.bikes.domain.model.BikeDetails

@@ -27,6 +27,7 @@ dependencies {
     ksp(libs.koin.annotations.ksp)
 
     testImplementation(libs.junit)
+    testImplementation(libs.kotlin.coroutines.test)
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
 }

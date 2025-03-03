@@ -16,7 +16,7 @@
       <SelectionState runConfigName="ReservationsDbTests">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="nonExistentBikeId_getReservationsCount_returnSum()">
+      <SelectionState runConfigName="ErrorDisplayWrapperKtTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
