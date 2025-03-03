@@ -152,6 +152,5 @@ class AddReservationViewModel(
         val to: Long = Date().time,
         val approxDistanceInKm: Int = 0,
         val intent: Intent? = null,
-    ) {
-    }
+    )
 }
