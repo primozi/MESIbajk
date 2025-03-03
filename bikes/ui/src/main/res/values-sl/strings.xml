@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="available">Na voljo</string>
-    <string name="reserved">Rezervirano</string>
+    <string name="reserved">Izposojeno</string>
     <string name="add_reservation">Dodaj rezervacijo</string>
     <string name="select_department">Izberi oddelek</string>
     <string name="intent">Namen</string>
