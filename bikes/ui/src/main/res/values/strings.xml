@@ -19,4 +19,5 @@
     <string name="intent_private">Private</string>
     <string name="intent_business">Business</string>
     <string name="users_name">User\'s name</string>
+    <string name="this_field_is_required">This field is required</string>
 </resources>

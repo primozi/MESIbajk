@@ -19,4 +19,5 @@
     <string name="intent_private">Zasebno</string>
     <string name="intent_business">Poslovno</string>
     <string name="users_name">Uporabnikovo ime</string>
+    <string name="this_field_is_required">To polje je obvezno</string>
 </resources>

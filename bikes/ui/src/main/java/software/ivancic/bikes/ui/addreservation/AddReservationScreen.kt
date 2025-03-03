@@ -36,6 +36,7 @@ import software.ivancic.core.ui.DateTime
 import software.ivancic.core.ui.DateTimeFormattingUtil
 import software.ivancic.core.ui.DateTimePicker
 import software.ivancic.core.ui.DropDownMenu
+import software.ivancic.core.ui.ErrorDisplayWrapper
 import software.ivancic.core.ui.theme.MESIbajkTheme
 import kotlin.math.roundToInt
 
@@ -50,7 +51,9 @@ fun AddReservationScreen(
 
     AddReservationScreenInternal(
         borrowerName = state.borrowerName,
+        borrowerNameError = state.borrowerNameError?.let { stringResource(it) },
         selectedBike = state.selectedBike,
+        bikeError = state.bikeError?.let { stringResource(it) },
         availableBikes = state.availableBikes,
         onBikeSelected = {
             viewModel.submitAction(AddReservationViewModel.Action.BikeSelected(it))
@@ -141,7 +144,9 @@ fun AddReservationScreen(
 private fun AddReservationScreenInternal(
     borrowerName: String,
     onBorrowerNameChanged: (String) -> Unit,
-    selectedBike: Bike? = null,
+    borrowerNameError: String?,
+    selectedBike: Bike?,
+    bikeError: String?,
     availableBikes: List<Bike>,
     onBikeSelected: (Bike) -> Unit,
     availableDepartments: List<Department>,
@@ -164,35 +169,43 @@ private fun AddReservationScreenInternal(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier
     ) {
-        TextField(
-            value = borrowerName,
-            onValueChange = onBorrowerNameChanged,
-            label = {
-                Text(text = stringResource(R.string.users_name))
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-        )
+        ErrorDisplayWrapper(
+            errorText = borrowerNameError,
+        ) {
+            TextField(
+                value = borrowerName,
+                onValueChange = onBorrowerNameChanged,
+                label = {
+                    Text(text = stringResource(R.string.users_name))
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+        }
 
-        DropDownMenu(
-            selectedItem = selectedBike,
-            availableItems = availableBikes,
-            onItemSelected = onBikeSelected,
-            selectedItemComposable = {
-                Text(
-                    text = it?.name ?: stringResource(R.string.select_bike),
-                    style = MaterialTheme.typography.headlineSmall,
-                )
-            },
-            listItemComposable = {
-                Text(
-                    text = it.name,
-                    style = MaterialTheme.typography.headlineSmall,
-                )
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-        )
+        ErrorDisplayWrapper(
+            errorText = bikeError,
+        ) {
+            DropDownMenu(
+                selectedItem = selectedBike,
+                availableItems = availableBikes,
+                onItemSelected = onBikeSelected,
+                selectedItemComposable = {
+                    Text(
+                        text = it?.name ?: stringResource(R.string.select_bike),
+                        style = MaterialTheme.typography.headlineSmall,
+                    )
+                },
+                listItemComposable = {
+                    Text(
+                        text = it.name,
+                        style = MaterialTheme.typography.headlineSmall,
+                    )
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+        }
 
         DropDownMenu(
             selectedItem = selectedDepartment,
@@ -314,7 +327,9 @@ private fun AddReservationScreenInternalPreview() {
             to = 0L,
             availableBikes = emptyList(),
             onBikeSelected = {},
-            selectedBike = null
+            selectedBike = null,
+            borrowerNameError = null,
+            bikeError = null,
         )
     }
 }

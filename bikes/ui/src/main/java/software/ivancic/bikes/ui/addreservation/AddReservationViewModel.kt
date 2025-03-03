@@ -1,5 +1,6 @@
 package software.ivancic.bikes.ui.addreservation
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
@@ -9,6 +10,7 @@ import software.ivancic.bikes.domain.model.Intent
 import software.ivancic.bikes.domain.model.ReservationData
 import software.ivancic.bikes.domain.usecases.GetListOfBikesUseCase
 import software.ivancic.bikes.domain.usecases.SaveReservationDataUseCase
+import software.ivancic.bikes.ui.R
 import software.ivancic.bikes.ui.addreservation.AddReservationViewModel.Action
 import software.ivancic.bikes.ui.addreservation.AddReservationViewModel.Effect
 import software.ivancic.bikes.ui.addreservation.AddReservationViewModel.State
@@ -34,22 +36,25 @@ class AddReservationViewModel(
             }
 
             Action.AddClicked -> {
-                viewModelScope.launch {
-                    val currentState = state.value
-                    saveReservationData(
-                        ReservationData(
-                            bike = currentState.selectedBike!!,
-                            start = currentState.from,
-                            end = currentState.to,
-                            usersName = currentState.borrowerName,
-                            intent = currentState.intent!!,
-                            department = currentState.selectedDepartment!!,
-                            kilometres = currentState.approxDistanceInKm,
-                        )
-                    ).onSuccess {
-                        emitEffect(Effect.NavigateBack)
-                    }.onFailure {
-                        // todo alert user
+                val isDataOk = checkData()
+                if (isDataOk) {
+                    viewModelScope.launch {
+                        val currentState = state.value
+                        saveReservationData(
+                            ReservationData(
+                                bike = currentState.selectedBike!!,
+                                start = currentState.from,
+                                end = currentState.to,
+                                usersName = currentState.borrowerName,
+                                intent = currentState.intent!!,
+                                department = currentState.selectedDepartment!!,
+                                kilometres = currentState.approxDistanceInKm,
+                            )
+                        ).onSuccess {
+                            emitEffect(Effect.NavigateBack)
+                        }.onFailure {
+                            // todo alert user
+                        }
                     }
                 }
             }
@@ -92,6 +97,27 @@ class AddReservationViewModel(
         }
     }
 
+    private fun checkData(): Boolean {
+        val currentState = state.value
+        var returnValue = true
+
+        if (currentState.borrowerName.isBlank()) {
+            updateState { it.copy(borrowerNameError = R.string.this_field_is_required) }
+            returnValue = false
+        } else {
+            updateState { it.copy(borrowerNameError = null) }
+        }
+
+        if (currentState.selectedBike == null) {
+            updateState { it.copy(bikeError = R.string.this_field_is_required) }
+            returnValue = false
+        } else {
+            updateState { it.copy(bikeError = null) }
+        }
+
+        return returnValue
+    }
+
     sealed interface Action {
         data class BorrowerNameChanged(val newName: String) : Action
         data class BikeSelected(val newBike: Bike) : Action
@@ -115,7 +141,9 @@ class AddReservationViewModel(
 
     data class State(
         val borrowerName: String = "",
+        @StringRes val borrowerNameError: Int? = null,
         val selectedBike: Bike? = null,
+        @StringRes val bikeError: Int? = null,
         val availableBikes: List<Bike> = emptyList(),
         val selectedDepartment: Department? = null,
         val availableDepartments: List<Department> = Department.entries,
@@ -124,5 +152,6 @@ class AddReservationViewModel(
         val to: Long = Date().time,
         val approxDistanceInKm: Int = 0,
         val intent: Intent? = null,
-    )
+    ) {
+    }
 }
