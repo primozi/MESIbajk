@@ -9,6 +9,10 @@ import org.junit.Test
 
 class ErrorDisplayWrapperKtTest {
 
+    /**
+     * Just some basic tests for one of the components.
+     */
+
     @get:Rule
     val composeTestRule = createComposeRule()
 

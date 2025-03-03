@@ -15,6 +15,12 @@ import org.junit.Assert.*
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+
+    /**
+     * Here a bunch of tests for checking if the correct fields are shown for each particular
+     * screen and if the data is indeed correct.
+     * Part of navigation tests should be here as well (necessarily the same class, though)
+     */
     @Test
     fun useAppContext() {
         // Context of the app under test.

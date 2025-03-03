@@ -7,6 +7,13 @@ import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
+/**
+ * This could be further optimized and joined with [UiPlugin]. Also, some of it should be made so
+ * that :app module could reuse this as well.
+ *
+ * There are some dependencies that are common to the modules as well, that
+ * could/should be included here
+ */
 class DataPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply("com.android.library") // id(libs.plugins.android.library)

@@ -37,6 +37,11 @@ interface BikeDao {
     @Insert
     suspend fun saveReservationData(reservationEntity: ReservationEntity)
 
+    /**
+     * A bunch of methods, that are written to support this one, could be skipped if the
+     * query had been written in a different, more complicated way.
+     * I'm not a fan of complicating, so I'm keeping them here.
+     */
     suspend fun getBikeDetails(id: Int): DbBikeDetails {
         val timestamp = System.currentTimeMillis()
         val bike = getBike(id)

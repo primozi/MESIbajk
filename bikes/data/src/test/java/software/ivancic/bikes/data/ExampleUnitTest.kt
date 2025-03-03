@@ -10,6 +10,11 @@ import org.junit.Assert.*
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
+
+    /**
+     * Here I could put tests to check if BikesRepositoryImpl is calling the correct
+     * DAO methods and if the conversions between data and domain models are correct.
+     */
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)

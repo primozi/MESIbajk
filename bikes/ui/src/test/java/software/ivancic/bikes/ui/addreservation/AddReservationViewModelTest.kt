@@ -35,6 +35,10 @@ import kotlin.test.assertNull
 @OptIn(ExperimentalCoroutinesApi::class)
 class AddReservationViewModelTest : KoinTest {
 
+    /**
+     * Just a few tests to show the idea
+     */
+
     private val viewModel: AddReservationViewModel by inject()
 
     @Before
