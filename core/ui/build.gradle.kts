@@ -25,7 +25,9 @@ dependencies {
 
     api(libs.androidx.lifecycle.viewmodel)
 
+    debugImplementation(libs.androidx.ui.test.manifest)
     testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
 }

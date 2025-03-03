@@ -10,10 +10,15 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+
+object ErrorDisplayWrapperTestTags {
+    const val ERROR_TEXT = "errorText"
+}
 
 @Composable
 fun ErrorDisplayWrapper(
@@ -45,7 +50,9 @@ fun ErrorDisplayWrapper(
             Text(
                 text = errorText,
                 color = errorColor,
-                style = MaterialTheme.typography.bodySmall
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier
+                    .testTag(ErrorDisplayWrapperTestTags.ERROR_TEXT)
             )
         }
     }
